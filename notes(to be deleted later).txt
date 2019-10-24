@@ -1,0 +1,17 @@
+NOTES:
+
+Added .gitignore, this ignores files created by Pycharm when committing and pushing. No changes required here.
+
+If you are using any other external modules other than pygames add it to requirements.txt with the version number.
+This lets PyCharm know what needs to be installed for the project.
+
+If you are using a virtual python environment(venv) the .gitignore file also ignores that.
+
+
+TODO:
+==========
+Kavin
+- Work on button class for tiles
+- Work on MinesweeperGUI
+
+
