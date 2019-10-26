@@ -14,4 +14,6 @@ Kavin
 - Work on button class for tiles
 - Work on MinesweeperGUI
 
+Sohrab
+- Work on Minesweeper Class
 
