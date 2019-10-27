@@ -13,12 +13,11 @@ class Minesweeper:
 
     === Representation Invariants ===
     """
-
     def __init__(self, board: Board):
         """
         Initialize this Minesweeper game.
 
-        Preconditions: 
+        Preconditions:
         """
         self.board = board
         self.window = None
