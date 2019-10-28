@@ -27,7 +27,7 @@ class Minesweeper:
 
     def update_display(self) -> None:
         """
-        update the PyGame display given the events.
+        update the PyGame display given the events of Tiles.
         """
         #TODO
         pass
@@ -36,19 +36,27 @@ class Minesweeper:
         """
         return true iff game has been won.
         """
-        #TODO
-        pass
+        #Return true if all flag coordinates and bomb coordinates are equal
+        #Certain variable names have artitrary name until further development of game
+        count = num_bombs
+        for row in range(len(board)):
+            for col in range(len(row)):
+                if board[row][col] == BombTile and board[row][col]._flagged:
+                    count += 1
+        return count == num_bombs
+                    
 
     def restart(self) -> None:
         """
-        restart teh Minesweeper game.
+        restart the Minesweeper game.
         """
         #TODO
         pass
 
     def game_loop(self) -> None:
         """
-        continue the game loop.
+        checks board for an event, sends and receives data from board and 
+        is used to update the board
         """
         #TODO
         pass
