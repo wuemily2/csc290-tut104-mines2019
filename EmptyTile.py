@@ -15,7 +15,7 @@ class EmptyTile(Tile):
     def process_left_click_tile(self) -> None:
         """
         Implement the process_left_click_tile method in the Tile class.
-        EmptyTile is initially unreavled. When it is clicked by the player,
+        EmptyTile is initially unrevealed. When it is clicked by the player,
         it reveals itself and all other EmptyTile around it unitile reaches
         NumberTile.
         
