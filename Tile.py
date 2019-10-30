@@ -1,5 +1,4 @@
 from __future__ import annotations
-from Board import Board
 from typing import Tuple
 
 
@@ -40,7 +39,7 @@ class Tile:
     _flagged: bool
     _revealed: bool
 
-    def __init__(self, board: Board, position: Tuple[int, int]):
+    def __init__(self, board:Board, position: Tuple[int, int]):
         """
         Initialize the tile with <board> and <position>. Initially, _flagged
         and _revealed are set to False, as the player has not clicked or flagged

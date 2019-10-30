@@ -44,7 +44,7 @@ class Minesweeper:
                 if board[row][col] == BombTile and board[row][col]._flagged:
                     count += 1
         return count == num_bombs
-                    
+
 
     def restart(self) -> None:
         """
@@ -55,7 +55,7 @@ class Minesweeper:
 
     def game_loop(self) -> None:
         """
-        checks board for an event, sends and receives data from board and 
+        checks board for an event, sends and receives data from board and
         is used to update the board
         """
         #TODO

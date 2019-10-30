@@ -1,3 +1,9 @@
+from __future__ import annotations
+from typing import Tuple
+import Board
+from Tile import Tile
+
+
 class EmptyTile(Tile):
     """
     The EmptyTile class extends the Tile class. It should has all attributes
@@ -5,6 +11,7 @@ class EmptyTile(Tile):
     The process_left_click_tile is implemented based on the behavior of
     EmptyTile.
     """
+
     def __init__(self, board: Board, position: Tuple[int, int]):
         """
         Initialize the EmptyTile class with board and position like the
@@ -18,6 +25,6 @@ class EmptyTile(Tile):
         EmptyTile is initially unrevealed. When it is clicked by the player,
         it reveals itself and all other EmptyTile around it unitile reaches
         NumberTile.
-        
+
         """
         pass
