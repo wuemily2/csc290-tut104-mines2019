@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Tuple
+from typing import Tuple, List
 
 
 class Tile:
@@ -33,13 +33,13 @@ class Tile:
             -_flagged and _revealed cannot store the same boolean value
             -_pos must contain values only within the game grid's range
         """
-    _board: Board
+    _board: List[List[Tile]]
     # _icon: #TODO decide the type of _icon
     _pos: Tuple[int, int]
     _flagged: bool
     _revealed: bool
 
-    def __init__(self, board:Board, position: Tuple[int, int]):
+    def __init__(self, board:List[List[Tile]], position: Tuple[int, int]):
         """
         Initialize the tile with <board> and <position>. Initially, _flagged
         and _revealed are set to False, as the player has not clicked or flagged

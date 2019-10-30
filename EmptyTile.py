@@ -1,6 +1,5 @@
 from __future__ import annotations
-from typing import Tuple
-import Board
+from typing import Tuple, List
 from Tile import Tile
 
 
@@ -12,7 +11,7 @@ class EmptyTile(Tile):
     EmptyTile.
     """
 
-    def __init__(self, board: Board, position: Tuple[int, int]):
+    def __init__(self, board: List[List[Tile]], position: Tuple[int, int]):
         """
         Initialize the EmptyTile class with board and position like the
         Tile class.
