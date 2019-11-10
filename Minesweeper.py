@@ -10,6 +10,15 @@ class Minesweeper:
     === Instance Attributes ===
 
     === Private Attributes ===
+    
+    _board:
+        Create a board from the Board class which contains Tile objects
+    
+    _buttons:
+        Buttons for the menu
+        
+    _window:
+        A window to display objects such as buttons
 
     === Representation Invariants ===
     """
@@ -29,8 +38,9 @@ class Minesweeper:
         """
         update the PyGame display given the events of Tiles.
         """
-        #TODO
-        pass
+        
+        pygame.display.update(Board.get_board())
+        
 
     def report_game_won(self) -> bool:
         """
