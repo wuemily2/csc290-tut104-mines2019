@@ -56,12 +56,14 @@ class Minesweeper:
         return count == num_bombs
 
 
-    def restart(self) -> None:
+    def restart(self, row_size, col_size, num_bombs) -> None:
         """
-        restart the Minesweeper game.
+        Restart the Minesweeper game, with the given row size, column size and number of bombs.
         """
-        #TODO
-        pass
+        self.board = Board(row_size, col_size, num_bombs)
+        self.window = None
+        self.buttons = []
+        
 
     def game_loop(self) -> None:
         """
