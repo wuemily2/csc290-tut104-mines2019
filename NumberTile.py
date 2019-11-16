@@ -12,13 +12,15 @@ class NumberTile(Tile):
     NumberTile.
     """
     _number: int
-    def __init__(self, board: List[List[Tile]], position: Tuple[int, int], number: int):
+    def __init__(self, board: List[List[Tile]], position: Tuple[int, int],
+                 number: int):
         """
         Initialize the NumberTile class with board and position like the
         Tile class.
         Precondition: 1 <= number <= 8
         """
         super().__init__(self, board, position)
+        # self._icon
         self._number = number
 
     def process_left_click_tile(self) -> None:

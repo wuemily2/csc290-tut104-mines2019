@@ -17,6 +17,7 @@ class EmptyTile(Tile):
         Tile class.
         """
         super().__init__(self, board, position)
+        # self._icon
 
     def process_left_click_tile(self) -> None:
         """
