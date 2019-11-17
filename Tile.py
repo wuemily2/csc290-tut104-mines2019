@@ -38,8 +38,9 @@ class Tile:
     _pos: Tuple[int, int]
     _flagged: bool
     _revealed: bool
+    _tile_type: str
 
-    def __init__(self, board:List[List[Tile]], position: Tuple[int, int]):
+    def __init__(self, board: List[List[Tile]], position: Tuple[int, int]):
         """
         Initialize the tile with <board> and <position>. Initially, _flagged
         and _revealed are set to False, as the player has not clicked or flagged
@@ -52,9 +53,10 @@ class Tile:
         self._icon = None
         self._pos = position
         self._flagged = self._revealed = False
+        self._tile_type = "Tile"
         # TODO: Modify if necessary
 
-    def process_left_click_tile(self) -> None:
+    def process_left_click_tile(self) -> bool:
         """
         Update the Board state based on the type of tile clicked.
         This is an abstract method.
@@ -62,29 +64,79 @@ class Tile:
            Method is called only when the player
            left-clicks the tile at _pos in the game grid.
            The tile cannot be flagged.
+        Post condition:
+            return true if the game doesn't end after this click
+            otherwise, return false
+        """
+        if self._revealed is True or self._flagged is True:
+            # Do nothing if revealed or flagged
+            return True
+        else:
+            self._reveal()
+        return self._calculate_click()
+
+    def _calculate_click(self) -> bool:
+        """
+        This method is only called by process_left_click_tile.
+        This is what is done when a tile is clicked.
+
+        returns false if it is a bomb tile. returns true otherwise
         """
         raise NotImplementedError
 
-    def flag_tile(self) -> None:
+    def flag_tile(self) -> bool:
         """
         Update the Tile _icon to a flag icon, as well as the game board's view.
         Preconditions:
         _revealed must be False
         Called only by a right-click.
+
+        Post conditions:
+        return whether flagging action is successful
         """
-        self._flag()
+        if self._revealed is False:
+            self._flag()
+            return True
+        return False
         # self._icon = #TODO set the correct icon
         # TODO: implement game board's view updating.
 
     def _flag(self) -> None:
         """
         Changes the boolean value stored in _flagged.
+        Return true if flagged, else false
         Precondition: _revealed is False
         """
         self._flagged = not self._flagged
+
+    def is_flagged(self):
+        return self._flagged
 
     def get_position(self) -> Tuple[int, int]:
         """
         :return: The position of the Tile
         """
         return self._pos
+
+    def get_tile_type(self) -> str:
+        return self._tile_type
+
+    def is_same_type(self, other: Tile) -> bool:
+        return self.get_tile_type() == other.get_tile_type()
+
+    def _reveal(self):
+        self._revealed = True
+
+    def is_revealed(self):
+        return self._revealed
+
+    def to_string(self) -> str:
+        if not self.is_revealed():
+            if self.is_flagged():
+                return "[F]"
+            else:
+                return "[|]"
+        return "[" + self.get_symbol() + "]"
+
+    def get_symbol(self) -> str:
+        raise NotImplementedError
