@@ -2,6 +2,7 @@ from __future__ import annotations
 from typing import Tuple, List
 from Tile import Tile
 
+
 class BombTile(Tile):
     """
     The BombTile class extends the Tile class. It should has all attributes
@@ -15,14 +16,12 @@ class BombTile(Tile):
         Initialize the BombTile class with board and position like the
         Tile class.
         """
-        super().__init__(self, board, position)
+        super().__init__(board, position)
         # self._icon
+        self._tile_type = "BombTile"
 
-    def process_left_click_tile(self) -> None:
-        """
-        Implement the process_left_click_tile method in the Tile class.
-        BombTile is initially unrevealed. When it is clicked by the player
-        without flagging, it reveals itself, and game over.
+    def _calculate_click(self) -> bool:
+        return False
 
-        """
-        pass
+    def get_symbol(self) -> str:
+        return " * "

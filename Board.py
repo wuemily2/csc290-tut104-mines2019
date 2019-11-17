@@ -1,7 +1,13 @@
 from __future__ import annotations
 from typing import List, Dict, Optional
-import Tile, EmptyTile, BombTile, NumberTile
+from Tile import Tile
+from EmptyTile import EmptyTile
+from BombTile import BombTile
+from NumberTile import NumberTile
 from random import randint
+import random
+
+random.seed(0)
 
 
 class Board:
@@ -23,16 +29,22 @@ class Board:
     _col_size: int
     _num_bombs: int
     board: List[List[Tile]]
+    _is_game_over: bool
+    _flagged_bombs: int
 
-    def __init__(self, row_size: int = 9, col_size: int = 9,
-                 num_bombs: int = 10) -> None:
+    def __init__(self, row_size: int = 5, col_size: int = 5,
+                 num_bombs: int = 3) -> None:
 
+        self.start_new_game(row_size, col_size, num_bombs)
+
+    def start_new_game(self, row_size: int = 9, col_size: int = 9,
+                       num_bombs: int = 10):
         self._row_size = row_size
         self._col_size = col_size
         self._num_bombs = num_bombs
-
         self.board = self.create_board()
-        # self.set_numbered_tiles()
+        self._is_game_over = False
+        self._flagged_bombs = 0
 
     def create_board(self) -> List[List[Tile]]:
         """
@@ -47,32 +59,86 @@ class Board:
         tile_draw = Sampler({1: ['Bomb', self._num_bombs],
                              2: ['Other', non_bomb_tile_count]})
 
-        board = [[None] * self._col_size for row in range(self._row_size)]
+        board = [[None] * self._col_size for x in range(self._row_size)]
 
-        for row in range(self._row_size):
-            for col in range(self._col_size):
+        for arow in range(self._row_size):
+            for acol in range(self._col_size):
                 tile_type = tile_draw.output_draw()
 
                 # Placeholder before implementation with BombTile and EmptyTile
-                board[row][col] = tile_type
+                board[arow][acol] = tile_type
 
                 if tile_type == 'Bomb':
-                    # board[row][col] = BombTile(self, (row, col))
-                    pass
+                    board[arow][acol] = BombTile(board, (arow, acol))
                 else:
-                    # board[row][col] = EmptyTile(self, (row, col))
-                    pass
+                    board[arow][acol] = EmptyTile(board, (arow, acol))
 
-        def set_numbered_tiles():
-            # TODO refresh the board with NumberTiles in the correct positions
-            pass
+        # Set numbered tiles
+        for arow in range(self._row_size):
+            for acol in range(self._col_size):
+                cur_tile = board[arow][acol]
+                if isinstance(cur_tile, EmptyTile):
+                    count = 0
+
+                    # Count number of bomb tiles
+                    for x_shift in [-1, 0, 1]:
+                        for y_shift in [-1, 0, 1]:
+                            if x_shift == y_shift == 0:
+                                continue  # Skip this loop iteration
+                            try:
+                                index = (cur_tile.get_position()[0] + x_shift,
+                                         cur_tile.get_position()[1] + y_shift)
+                                other_tile = board[index[0]][
+                                    index[1]]
+                                if isinstance(other_tile, BombTile):
+                                    count += 1
+                            except IndexError:  # do nothing
+                                pass
+                    if count > 0:
+                        board[arow][acol] = NumberTile(board, (arow, acol),
+                                                       count)
 
         return board
 
     def print_board(self):
         # This is a function to test board generation
-        for row in self.board:
-            print(row)
+        for arow in range(self._row_size):
+            row_accum = "["
+            for acol in range(self._col_size):
+                row_accum += self.board[arow][acol].to_string() + ","
+            row_accum += "]"
+            print(row_accum)
+
+    def left_click(self, arow, acol):
+        if self._is_game_over:
+            return
+        try:
+            if not self.board[arow][acol].process_left_click_tile():  # if bomb
+                self._is_game_over = True
+        except IndexError:
+            print("Out of Bounds")
+
+    def right_click(self, arow, acol):
+        if self._is_game_over:
+            return
+        try:
+            the_tile = self.board[arow][acol]
+            if the_tile.flag_tile() and isinstance(the_tile, BombTile):
+                if the_tile.is_flagged():
+                    self._flagged_bombs += 1
+                    if self.is_game_won():
+                        self._is_game_over = True
+                else:
+                    self._flagged_bombs -= 1
+        except IndexError:
+            print("Out of Bounds")
+
+    def is_game_won(self) -> bool:
+        # return if all bombs are flagged
+        return self._flagged_bombs == self._num_bombs
+
+    def is_game_over(self):
+        return self._is_game_over
 
 
 class Sampler:
@@ -149,9 +215,35 @@ class Sampler:
 
 
 if __name__ == '__main__':
-    test = Sampler({1: ['Bomb', 1], 2: ['Empty', 6]})
+    '''test = Sampler({1: ['Bomb', 1], 2: ['Empty', 6]})
     for i in range(5):
         print("You drew a " + test.output_draw() + "!")
-        test.print_sample_state()
+        test.print_sample_state()'''
     board_test = Board()
-    board_test.print_board()
+    keep_playing = True
+    while keep_playing:
+        while not board_test.is_game_over():
+            board_test.print_board()
+            try:
+                row = int(input("Enter a row: "))
+                col = int(input("Enter a column: "))
+                click_type = int(input(
+                    "Enter 0 for left click, and 1 for right click" +
+                    ", and anything else aborts your move: "))
+                if click_type == 0:
+                    board_test.left_click(row, col)
+                elif click_type == 1:
+                    board_test.right_click(row, col)
+                else:
+                    print("move aborted")
+            except:
+                print("You didn't input a correct number, try again")
+        if board_test.is_game_won():
+            print("You won the game!")
+        board_test.print_board()
+        print("Game is over!")
+        play_again = input("Do you want to play again? [enter y/n]: ")
+        if play_again == "y":
+            board_test.start_new_game()
+        elif play_again == "n":
+            keep_playing = False

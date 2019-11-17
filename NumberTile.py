@@ -2,6 +2,7 @@ from __future__ import annotations
 from typing import Tuple, List
 from Tile import Tile
 
+
 class NumberTile(Tile):
     """
     The NumberTile class extends the Tile class. It should has all attributes
@@ -12,6 +13,7 @@ class NumberTile(Tile):
     NumberTile.
     """
     _number: int
+
     def __init__(self, board: List[List[Tile]], position: Tuple[int, int],
                  number: int):
         """
@@ -19,15 +21,16 @@ class NumberTile(Tile):
         Tile class.
         Precondition: 1 <= number <= 8
         """
-        super().__init__(self, board, position)
+        super().__init__(board, position)
         # self._icon
         self._number = number
+        self._tile_type = "NumberTile"
 
-    def process_left_click_tile(self) -> None:
-        """
-        Implement the process_left_click_tile method in the Tile class.
-        NumberTile is initially unrevealed. When it is clicked by the player,
-        it reveals itself, showing the number of BombTile around it self.
+    def get_number(self)-> int:
+        return self._number
 
-        """
-        pass
+    def _calculate_click(self) -> bool:
+        return True
+
+    def get_symbol(self) -> str:
+        return str(self.get_number())
