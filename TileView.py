@@ -29,7 +29,7 @@ class TileView:
         screen.blit(self._image, position)
 
     def update(self, screen, image):
-        
+
 
         self._image = pygame.image.load(
             os.path.join(os.path.dirname(__file__), "assets/" + image + ".png"))

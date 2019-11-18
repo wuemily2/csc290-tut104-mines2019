@@ -41,9 +41,11 @@ class MinesweeperGUI:
         for row in range(self.board_size):
             self._button_board += [[]]
             for col in range(self.board_size):
+                #self.board.get_tile(row, col)._revealed = True
                 image = self.board.get_tile(row, col).get_tile_type()
                 size = (int(self.board_width / self.board_size),
                         int(self.board_height / self.board_size))
+                # Creating the tiles
                 b = TileView(size, image)
                 b.set_tile_id((row, col))
                 b.draw(self.screen, position)
@@ -55,18 +57,23 @@ class MinesweeperGUI:
     def _board_event_handler(self, event):
         for row in range(self.board_size):
             for col in range(self.board_size):
-                if self._button_board[row][col].get_rect().collidepoint(event.pos):
+                if self._button_board[row][col].get_rect().collidepoint(
+                        event.pos[0], event.pos[1]):
                     self.screen.fill((200, 200, 200))
                     input = self._button_board[row][col].id
-                    print("row:" + str(input[0]))
-                    print("col:" + str(input[1]))
-                    self.board.reveal(input[1], input[0])
+                    self.board.reveal(input[0], input[1])
                     self.update()
+
+                    # these are fine
+                    # image = self.board.get_tile(row, col).get_tile_type()
+                    # print(image)
+                    # print(str(self.board.board[row][col]))
+                    # self.board.print_board()
 
     def update(self):
         for row in range(self.board_size):
             for col in range(self.board_size):
-                image = self.board.get_tile(row, col).get_tile_type()
+                image = self.board.get_tile(col, row).get_tile_type()
                 self._button_board[row][col].update(self.screen, image)
 
     def start(self):
