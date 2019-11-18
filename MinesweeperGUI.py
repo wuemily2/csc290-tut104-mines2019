@@ -26,7 +26,7 @@ class MinesweeperGUI:
         self.board_width = 600
         self._button_board = []
         self.board_size = 9
-        self.bomb_number = 2
+        self.bomb_number = 10
         width = self.board_width
         height = self.menu_height + self.board_height
         pygame.init()
@@ -58,6 +58,8 @@ class MinesweeperGUI:
                 if self._button_board[row][col].get_rect().collidepoint(event.pos):
                     self.screen.fill((200, 200, 200))
                     input = self._button_board[row][col].id
+                    print("row:" + str(input[0]))
+                    print("col:" + str(input[1]))
                     self.board.reveal(input[1], input[0])
                     self.update()
 
@@ -73,8 +75,9 @@ class MinesweeperGUI:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     crashed = True
-                if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                     self._board_event_handler(event)
+                    right = 2
 
             pygame.display.update()
 
