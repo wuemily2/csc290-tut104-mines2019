@@ -90,7 +90,8 @@ class Board:
                                          cur_tile.get_position()[1] + y_shift)
                                 other_tile = board[index[0]][
                                     index[1]]
-                                if isinstance(other_tile, BombTile):
+                                if index[0] >= 0 and index[1] >=0 and \
+                                        isinstance(other_tile, BombTile):
                                     count += 1
                             except IndexError:  # do nothing
                                 pass
