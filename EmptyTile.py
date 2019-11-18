@@ -1,7 +1,7 @@
 from __future__ import annotations
 from typing import Tuple, List
 from Tile import Tile
-
+from NumberTile import NumberTile
 
 class EmptyTile(Tile):
     """
@@ -39,10 +39,11 @@ class EmptyTile(Tile):
                         # Account for annoying negative indexing
                         continue  # skip loop
                     other_tile = self._board[click_index[0]][click_index[1]]
-                    other_tile_type = other_tile.get_tile_type()
-                    if other_tile_type in ["EmptyTile", "NumberTile"]:
-                        # print("other_tile_type found! proceed to click: "
-                        # + other_tile_type)
+                    #other_tile_type = other_tile.get_tile_type()
+                    if isinstance(other_tile, EmptyTile) or\
+                        isinstance(other_tile, NumberTile):
+                        #print("other_tile_type found! proceed to click: "
+                        #+ other_tile_type)
                         other_tile.reveal_tile()
                 except IndexError:  # do nothing
                     pass
