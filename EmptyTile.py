@@ -7,7 +7,7 @@ class EmptyTile(Tile):
     """
     The EmptyTile class extends the Tile class. It should has all attributes
     and methods of the Tile class.
-    The process_left_click_tile is implemented based on the behavior of
+    The reveal_tile is implemented based on the behavior of
     EmptyTile.
     """
 
@@ -22,7 +22,7 @@ class EmptyTile(Tile):
 
     def _calculate_click(self):
         """
-        Implement the process_left_click_tile method in the Tile class.
+        Implement the reveal_tile method in the Tile class.
         EmptyTile is initially unrevealed. When it is clicked by the player,
         it reveals itself and all other EmptyTile and Numbered Tiles around it.
         """
@@ -43,7 +43,7 @@ class EmptyTile(Tile):
                     if other_tile_type in ["EmptyTile", "NumberTile"]:
                         # print("other_tile_type found! proceed to click: "
                         # + other_tile_type)
-                        other_tile.process_left_click_tile()
+                        other_tile.reveal_tile()
                 except IndexError:  # do nothing
                     pass
         return True

@@ -109,16 +109,16 @@ class Board:
             row_accum += "]"
             print(row_accum)
 
-    def left_click(self, arow, acol):
+    def reveal(self, arow, acol):
         if self._is_game_over:
             return
         try:
-            if not self.board[arow][acol].process_left_click_tile():  # if bomb
+            if not self.board[arow][acol].reveal_tile():  # if bomb
                 self._is_game_over = True
         except IndexError:
             print("Out of Bounds")
 
-    def right_click(self, arow, acol):
+    def flag(self, arow, acol):
         if self._is_game_over:
             return
         try:
@@ -140,6 +140,8 @@ class Board:
     def is_game_over(self):
         return self._is_game_over
 
+    def get_tile(self, row: int, col: int) -> Tile:
+        return self.board[row][col]
 
 class Sampler:
     """
@@ -231,9 +233,9 @@ if __name__ == '__main__':
                     "Enter 0 for left click, and 1 for right click" +
                     ", and anything else aborts your move: "))
                 if click_type == 0:
-                    board_test.left_click(row, col)
+                    board_test.reveal(row, col)
                 elif click_type == 1:
-                    board_test.right_click(row, col)
+                    board_test.flag(row, col)
                 else:
                     print("move aborted")
             except:

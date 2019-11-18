@@ -56,7 +56,7 @@ class Tile:
         self._tile_type = "Tile"
         # TODO: Modify if necessary
 
-    def process_left_click_tile(self) -> bool:
+    def reveal_tile(self) -> bool:
         """
         Update the Board state based on the type of tile clicked.
         This is an abstract method.
@@ -77,7 +77,7 @@ class Tile:
 
     def _calculate_click(self) -> bool:
         """
-        This method is only called by process_left_click_tile.
+        This method is only called by reveal_tile.
         This is what is done when a tile is clicked.
 
         returns false if it is a bomb tile. returns true otherwise

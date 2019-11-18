@@ -9,7 +9,7 @@ class NumberTile(Tile):
     and methods of the Tile class.
     Each NumberTile has an attribute number which presents the number of
     bombs around it. The range of the number is 1 to 8.
-    The process_left_click_tile is implemented based on the behavior of
+    The reveal_tile is implemented based on the behavior of
     NumberTile.
     """
     _number: int
@@ -26,11 +26,11 @@ class NumberTile(Tile):
         self._number = number
         self._tile_type = "NumberTile"
 
-    def get_number(self)-> int:
+    def get_type(self) -> int:
         return self._number
 
     def _calculate_click(self) -> bool:
         return True
 
     def get_symbol(self) -> str:
-        return str(self.get_number())
+        return str(self.get_type())

@@ -1,62 +1,60 @@
 import pygame
 import os
 
-
-class TileView(object):
+class TileView:
     """
     The TileView class handles changes needed for the view of each tile
     and updates itself
 
     == Attributes ==
-    size: size of the tile
-    position: position of the tile on a given screen, (0, 0) by default
-    image: The image of the current tile,
+    _size: size of the tile
+    _position: position of the tile on a given screen, (0, 0) by default
+    _image: The image of the current tile,
             eg: closed tile image if the tile is closed
-    screen: the screen for which the tileview belongs to
+    id: stores the information on the row and column coordinate of the button
     """
     _size: tuple
-    _position: tuple
+    position: tuple
     _image: pygame.image
-    _screen: pygame.display
+    id: tuple
 
-    def __init__(self, size: tuple, image_loc: str,
-                 screen: pygame.display) -> None:
-
-        self._position = (0, 0)
+    def __init__(self, size: tuple, image: str) -> None:
+        self.position = (0, 0)
         self._size = size
-        self._screen = screen
-        self.set_image(image_loc)
+        self._image = pygame.image.load(os.path.join(os.path.dirname(__file__), "assets/" + image + ".png"))
+        self._image.transform.scale(self._image, self._size)
 
-    def draw(self, position: tuple) -> None:
-        """
-        Draws the TileView on a given pygame screen
+    def draw(self, screen):
 
-        :param position: the position at which to draw
-        """
-        self._position = position
-        rect = self._image.get_rect()
-        rect = rect.move(self._position)
+        # draw selected image
+        screen.blit(self._image, self.position)
 
-        # draws the image at the specified screen
-        self._screen.blit(self._image, rect)
-
-    def set_image(self, image_loc: str) -> None:
+    def set_tile(self, tile: str) -> None:
         """
         Changes the image of the view and updates it the screen
 
-        :param image_loc: the location of the image
-                eg: "assets/1.png"
+        :param tile: name of the tile
+                eg: "bomb" for bomb tile
         """
         self._image = pygame.image.load(
-            os.path.join(os.path.dirname(__file__), image_loc))
-        self._image = pygame.transform.scale(self._image, self._size)
-        self.draw(self._position)
+            os.path.join(os.path.dirname(__file__), "assets/" + tile + ".png"))
+        self._image.transform.scale(self._image, self._size)
 
-    # TODO:
+    def get_rect(self):
+        return self._image.getrect()
 
-    # Saved for later implementaion
+    def set_tile_id(self, id: tuple) -> None:
+        """
+        :param id:
+        :return:
+        """
+        self.id = id
+
     # def event_handler(self, event):
-    #     if event.type == pygame.MOUSEBUTTONDOWN:
-    #         if event.button == 1:
-    #             if self._rect.collidepoint(event.pos):
     #
+    #     # change selected color if rectange clicked
+    #     if event.type == pygame.MOUSEBUTTONDOWN:  # is some button clicked
+    #         if event.button == 1:  # is left button clicked
+    #             if self._rect.collidepoint(event.pos):  # is mouse over button
+
+

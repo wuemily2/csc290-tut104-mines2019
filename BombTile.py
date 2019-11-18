@@ -7,7 +7,7 @@ class BombTile(Tile):
     """
     The BombTile class extends the Tile class. It should has all attributes
     and methods of the Tile class.
-    The process_left_click_tile is implemented based on the behavior of
+    The reveal_tile is implemented based on the behavior of
     BombTile.
     """
 
