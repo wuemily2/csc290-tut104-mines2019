@@ -14,13 +14,11 @@ class TileView:
     id: stores the information on the row and column coordinate of the button
     """
     _size: tuple
-    position: tuple
     _image: pygame.image
     rect: pygame.Rect
     id: tuple
 
     def __init__(self, size: tuple, image: str) -> None:
-        self.position = (0, 0)
         self._size = size
         self._image = pygame.image.load(os.path.join(
             os.path.dirname(__file__), "assets/" + image + ".png"))
@@ -31,30 +29,27 @@ class TileView:
         screen.blit(self._image, position)
 
     def update(self, screen, image):
+        
+
         self._image = pygame.image.load(
             os.path.join(os.path.dirname(__file__), "assets/" + image + ".png"))
         self._image = pygame.transform.scale(self._image, self._size)
         position = (self.id[0]*self._size[0], self.id[1]*self._size[1])
         screen.blit(self._image, position)
 
-    def set_tile(self, tile: str) -> None:
+    def get_rect(self) -> pygame.Rect:
         """
-        Changes the image of the view and updates it the screen
-
-        :param tile: name of the tile
-                eg: "bomb" for bomb tile
+        Gets rectangle of the Tile which is needed to check if the mouse clicked
+        on its area.
+        :return: the rectangle box belonging to the the tile.
         """
-        self._image = pygame.image.load(
-            os.path.join(os.path.dirname(__file__), "assets/" + tile + ".png"))
-        self._image.transform.scale(self._image, self._size)
-
-    def get_rect(self):
         return self.rect
 
     def set_tile_id(self, id: tuple) -> None:
         """
-        :param id:
-        :return:
+        Sets an id of the tile which marks its location of the Minesweeper Board.
+        :param id: accepts a tupple with row and column
+        :return: None
         """
         self.id = id
 
