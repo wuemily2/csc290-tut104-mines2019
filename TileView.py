@@ -16,18 +16,26 @@ class TileView:
     _size: tuple
     position: tuple
     _image: pygame.image
+    rect: pygame.Rect
     id: tuple
 
     def __init__(self, size: tuple, image: str) -> None:
         self.position = (0, 0)
         self._size = size
-        self._image = pygame.image.load(os.path.join(os.path.dirname(__file__), "assets/" + image + ".png"))
-        self._image.transform.scale(self._image, self._size)
+        self._image = pygame.image.load(os.path.join(
+            os.path.dirname(__file__), "assets/" + image + ".png"))
+        self._image = pygame.transform.scale(self._image, size)
 
-    def draw(self, screen):
+    def draw(self, screen, position):
+        self.rect = self._image.get_rect().move(position[0], position[1])
+        screen.blit(self._image, position)
 
-        # draw selected image
-        screen.blit(self._image, self.position)
+    def update(self, screen, image):
+        self._image = pygame.image.load(
+            os.path.join(os.path.dirname(__file__), "assets/" + image + ".png"))
+        self._image = pygame.transform.scale(self._image, self._size)
+        position = (self.id[0]*self._size[0], self.id[1]*self._size[1])
+        screen.blit(self._image, position)
 
     def set_tile(self, tile: str) -> None:
         """
@@ -41,7 +49,7 @@ class TileView:
         self._image.transform.scale(self._image, self._size)
 
     def get_rect(self):
-        return self._image.getrect()
+        return self.rect
 
     def set_tile_id(self, id: tuple) -> None:
         """
@@ -49,12 +57,4 @@ class TileView:
         :return:
         """
         self.id = id
-
-    # def event_handler(self, event):
-    #
-    #     # change selected color if rectange clicked
-    #     if event.type == pygame.MOUSEBUTTONDOWN:  # is some button clicked
-    #         if event.button == 1:  # is left button clicked
-    #             if self._rect.collidepoint(event.pos):  # is mouse over button
-
 

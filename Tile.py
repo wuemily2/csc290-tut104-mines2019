@@ -119,7 +119,12 @@ class Tile:
         return self._pos
 
     def get_tile_type(self) -> str:
-        return self._tile_type
+        if not (self.is_revealed()):
+            return "closed"
+        elif self.is_flagged():
+            return "flag"
+        else:
+            return self._tile_type
 
     def is_same_type(self, other: Tile) -> bool:
         return self.get_tile_type() == other.get_tile_type()

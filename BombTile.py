@@ -18,7 +18,7 @@ class BombTile(Tile):
         """
         super().__init__(board, position)
         # self._icon
-        self._tile_type = "BombTile"
+        self._tile_type = "bomb"
 
     def _calculate_click(self) -> bool:
         return False

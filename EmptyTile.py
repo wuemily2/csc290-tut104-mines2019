@@ -18,7 +18,7 @@ class EmptyTile(Tile):
         """
         super().__init__(board, position)
         # self._icon
-        self._tile_type = "EmptyTile"
+        self._tile_type = "empty"
 
     def _calculate_click(self):
         """

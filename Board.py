@@ -7,7 +7,7 @@ from NumberTile import NumberTile
 from random import randint
 import random
 
-random.seed(0)
+#random.seed(0)
 
 
 class Board:

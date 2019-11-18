@@ -24,13 +24,18 @@ class NumberTile(Tile):
         super().__init__(board, position)
         # self._icon
         self._number = number
-        self._tile_type = "NumberTile"
+        self._tile_type = f"{number}"
 
-    def get_type(self) -> int:
-        return self._number
+    def get_tile_type(self) -> str:
+        if not (self.is_revealed()):
+            return "closed"
+        elif self.is_flagged():
+            return "flag"
+        else:
+            return self._tile_type
 
     def _calculate_click(self) -> bool:
         return True
 
     def get_symbol(self) -> str:
-        return str(self.get_type())
+        return self.get_tile_type()
