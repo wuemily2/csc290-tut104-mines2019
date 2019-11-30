@@ -8,10 +8,18 @@ import sys
 
 class MinesweeperGUI:
     """
-        MinesweeperGUI class handles the game window and updating it.
+    MinesweeperGUI class handles the game window and updating it.
 
-        == Attributes ==
-
+    == Attributes ==
+    menu_height: The height of the menu bar for all the menu buttons
+    board_height: The height of the game board
+    board_width: The width of the window and game board
+    row_size: The number of rows for the minesweeper game board
+    col_size: The number of columns for the minesweeper game board
+    bomb_number: The number of bombs on the board
+    board: The minesweeper that handles game logic
+    _button_board: The tile board the user sees on the board
+    screen: The screen to draw and collect inputs from
     """
     menu_height: int
     board_height: int
@@ -38,7 +46,12 @@ class MinesweeperGUI:
         self.screen.fill((200, 200, 200))
         pygame.display.set_caption('MineSweeperV2.0')
 
-    def _create_board(self):
+    def _create_board(self) -> None:
+        """
+        Creates the TileView and assembles them on the board according to the
+        row and column size. The method also sets the position for the tile
+        so it can be reused to update the board after every move.
+        """
         size = self._get_tile_size()
         starting_x = int((self.board_width - (size[0]*self.col_size))/2)
         starting_y = int((self.board_height - (size[1]*self.row_size))/2) + self.menu_height
@@ -49,27 +62,36 @@ class MinesweeperGUI:
         for row in range(self.row_size):
             self._button_board += [[]]
             for col in range(self.col_size):
-                # self.board.get_tile(row, col)._revealed = True
                 image = self.board.get_tile(row, col).get_tile_type()
                 # Creating the tiles
-                b = TileView(size, image)
-                b.set_tile_id((row, col))
+                b = TileView(size, image, (row, col))
                 b.draw(self.screen, position)
                 position[0] += size[0]
                 self._button_board[row] += [b]
             position[0] = starting_x
             position[1] += size[1]
 
-    def _get_tile_size(self):
+    def _get_tile_size(self) -> tuple:
+        """
+        Calculates the size of the tiles based on the view width, height and
+        row, column size.
+        :return: The size of the tile in a tuple
+        """
         row_length = int(self.board_width / self.row_size)
         col_length = int(self.board_height / self.col_size)
         size = (min(row_length, col_length), min(row_length, col_length))
         return size
 
-    def set_board_property(self):
-
-
-    def _board_event_handler(self, event):
+    def _board_event_handler(self, event: pygame.event) -> None:
+        """
+        Takes the event input and performs the task for different types of
+        events. It also updates the board right after.
+        Also checks each button/tile and checks the position of the click with
+        the button or tile.
+        Left click: reveal tile, or perform button click event
+        Right click: flag a tile or do nothing if its not a tile.
+        :param event: Mouse click event.
+        """
         for row in range(self.row_size):
             for col in range(self.col_size):
                 if self._button_board[row][col].get_rect().collidepoint(
@@ -81,7 +103,10 @@ class MinesweeperGUI:
                         self.board.flag(input[0], input[1])
                     self.update()
 
-    def update(self):
+    def update(self) -> None:
+        """
+        Clears and updates the screen with new tile updates and info.
+        """
         self.screen.fill((200, 200, 200))
         for row in range(self.row_size):
             for col in range(self.col_size):
@@ -96,7 +121,11 @@ class MinesweeperGUI:
                         image = self.board.board[row][col].get_tile_type()
                         self._button_board[row][col].update(self.screen, image)
 
-    def start(self):
+    def start(self) -> None:
+        """
+        Starts the game loop that tracks the user input
+         and updates board constantly.
+        """
         crashed = False
         while not crashed:
             for event in pygame.event.get():

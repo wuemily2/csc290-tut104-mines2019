@@ -19,8 +19,9 @@ class TileView:
     position: tuple
     id: tuple
 
-    def __init__(self, size: tuple, image: str) -> None:
+    def __init__(self, size: tuple, image: str, id: tuple) -> None:
         self._size = size
+        self.id = id
         self._image = pygame.image.load(os.path.join(
             os.path.dirname(__file__), "assets/" + image + ".png"))
         self._image = pygame.transform.scale(self._image, size)
@@ -45,11 +46,4 @@ class TileView:
         """
         return self.rect
 
-    def set_tile_id(self, id: tuple) -> None:
-        """
-        Sets an id of the tile which marks its location of the Minesweeper Board.
-        :param id: accepts a tupple with row and column
-        :return: None
-        """
-        self.id = id
 
