@@ -26,14 +26,6 @@ class NumberTile(Tile):
         self._number = number
         self._tile_type = f"{number}"
 
-    def get_tile_type(self) -> str:
-        if not (self.is_revealed()):
-            return "closed"
-        elif self.is_flagged():
-            return "flag"
-        else:
-            return self._tile_type
-
     def _calculate_click(self) -> bool:
         return True
 

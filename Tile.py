@@ -119,10 +119,10 @@ class Tile:
         return self._pos
 
     def get_tile_type(self) -> str:
-        if not (self.is_revealed()):
-            return "closed"
-        elif self.is_flagged():
+        if self.is_flagged():
             return "flag"
+        elif not (self.is_revealed()):
+            return "closed"
         else:
             return self._tile_type
 

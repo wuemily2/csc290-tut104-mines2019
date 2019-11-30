@@ -16,6 +16,7 @@ class TileView:
     _size: tuple
     _image: pygame.image
     rect: pygame.Rect
+    position: tuple
     id: tuple
 
     def __init__(self, size: tuple, image: str) -> None:
@@ -25,17 +26,16 @@ class TileView:
         self._image = pygame.transform.scale(self._image, size)
 
     def draw(self, screen, position):
+        self.position = position.copy()
         self.rect = self._image.get_rect().move(position[0], position[1])
         screen.blit(self._image, position)
 
     def update(self, screen, image):
 
-
         self._image = pygame.image.load(
             os.path.join(os.path.dirname(__file__), "assets/" + image + ".png"))
         self._image = pygame.transform.scale(self._image, self._size)
-        position = (self.id[0]*self._size[0], self.id[1]*self._size[1])
-        screen.blit(self._image, position)
+        screen.blit(self._image, self.position)
 
     def get_rect(self) -> pygame.Rect:
         """
