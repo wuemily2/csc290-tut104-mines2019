@@ -6,7 +6,7 @@ A modern interpretation on the classic Minesweeper game in `Python` using `PyGam
 2. [How To Play Minesweeper 2.0](#playing-minesweeper-20)
 3. [Documentation](#documentation)
 4. [Authors and Contributions](#authors-and-contributions)
-5. [License](https://github.com/SohrabAmin/somegoodname/new/master?readme=1#License)
+5. [License](#license)
 
 ## Installing Minesweeper 2.0
 ## Playing Minesweeper 2.0
