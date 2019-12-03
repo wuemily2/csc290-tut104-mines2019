@@ -9,6 +9,13 @@ A modern interpretation on the classic Minesweeper game in `Python` using `PyGam
 5. [License](#license)
 
 ## Installing Minesweeper 2.0
+###### For Both Mac and Windows
+1. Download [Pygame](https://www.pygame.org/download.shtml) 
+2. Go to our [GitHub Repository](https://github.com/wuemily2/csc290-tut104-mines2019)
+3. Click > Clone or Download
+4. Click > Download ZIP
+5. Unzip the file and run the exectuable named MinesweeperGUI.py using any IDE
+6. Enjoy!
 ## Playing Minesweeper 2.0
 To Play Minesweeper 2.0 the rules of the original minesweeper still apply. We have a table of tiles that can be pressed with your mouse. Some tiles contain bombs underneath, and your goal is to flag them using the right click on your mouse. The game is won when all the bombs have been flagged. If you happen to left click on a tile with a bomb underneath, the game is lost. The number on a tile represents how many bombs are surround it.
 ## Documentation
