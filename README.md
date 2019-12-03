@@ -3,9 +3,10 @@ A modern interpretation on the classic Minesweeper game in `Python` using `PyGam
 ## Index
 1. [How To Install Minesweeper 2.0](#installing-minesweeper-20)
 2. [How To Play Minesweeper 2.0](#playing-minesweeper-20)
-3. [Documentation](#documentation)
-4. [Authors and Contributions](#authors-and-contributions)
-5. [License](#license)
+3. [Extending Minesweeper 2.0](#extending-minesweeper-20)
+4. [Documentation](#documentation)
+5. [Authors and Contributions](#authors-and-contributions)
+6. [License](#license)
 
 ## Installing Minesweeper 2.0
 ###### For Both Mac and Windows
@@ -23,7 +24,7 @@ To Play Minesweeper 2.0 the rules of the original minesweeper still apply. We ha
 ![To Download](assets/screenshot_1.PNG)
 ![To Download](assets/screenshot_2.PNG)
 
-
+## Extending Minesweeper 2.0
 
 ## Documentation
 ## Authors and Contributions
