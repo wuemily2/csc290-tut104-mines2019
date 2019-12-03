@@ -19,6 +19,12 @@ A modern interpretation on the classic Minesweeper game in `Python` using `PyGam
 
 ## Playing Minesweeper 2.0
 To Play Minesweeper 2.0 the rules of the original minesweeper still apply. We have a table of tiles that can be pressed with your mouse. Some tiles contain bombs underneath, and your goal is to flag them using the right click on your mouse. The game is won when all the bombs have been flagged. If you happen to left click on a tile with a bomb underneath, the game is lost. The number on a tile represents how many bombs are surround it.
+
+![To Download](assets/screenshot_1.PNG)
+![To Download](assets/screenshot_2.PNG)
+
+
+
 ## Documentation
 ## Authors and Contributions
 #### Kavin Adithiya
