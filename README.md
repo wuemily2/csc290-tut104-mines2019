@@ -39,7 +39,8 @@ To Play Minesweeper 2.0 the rules of the original minesweeper still apply. We ha
 #### Kavin Adithiya
 > Insert Contribution
 #### Sohrab Amin
-> Insert Contribution
+> In terms of code, I contributed in designing the original Model-View Controller template. We used aspects of the original template in our current production code, with revisions of course. I created the `Minesweeper.py` class and it's corresponding methods and attributes. I used the original template here by creating the empty `__init__`, `update_display()`, `report_game_won()`, `restart()` and `game_loop()` methods. For each method I wrote the appropiate documentation, describing its purpose. Specfically, I implemented the `restart()` method. Unfortunately, we decided to remove the entirety of the `Minesweeper.py` file as it was redundant with other code we wrote. With regards to the README file, I decided to create a collaborative Google Docs file where we can share our ideas about what type of content we want to include. I then wanted to add the content into our actual README where I soon realized it uses a Markdown writing style. I quickly adjusted and added the appropiate headers and filled in the [How to Play Minesweeper](#playing-minesweeper-20) section. 
+
 #### Aishah Kabir
 > In regards to the coding aspect of the game, I implemented most of Minesweeper Class where we handled updating the display, reporting a game won, restarting the game, and the game loop. This file no longer exists because we realized there were better and more efficient ways to implement these methods instead of in Minesweeper Class. We moved these methods to MinesweeperGUI and Board.py and renamed them as well to things such as `update()`, `start_new_game()`, and `is_game_won()`. In the ReadMe file I created the instructions on how to install our game and revised the file to make sure things were gramatically and technially correct. 
 #### Emily Wu
