@@ -26,7 +26,7 @@ To Play Minesweeper 2.0 the rules of the original minesweeper still apply. We ha
 
 ## Extending Minesweeper 2.0
   Everyone is free to fork our project and extend to the game anyway you would like. There are pending features like the menu bar, the board size changer and number of bombs changer that are yet to be implemented. The GUI `MinesweeperGUI.py`and the logic class `Board.py`
-both support easy manipulation of the size of the row and addition of bombs.
+both support changes to board size and addition of bombs.
 
 ## Documentation
   The Github Directory is structured such that all Python files and the assets folder are located in the root folder of the directory. This directory only contains one folder, which contains the visual PNG assets required for the game as well as the images included in this ReadMe. 
