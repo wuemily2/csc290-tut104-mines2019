@@ -28,8 +28,11 @@ To Play Minesweeper 2.0 the rules of the original minesweeper still apply. We ha
 
 ## Documentation
   The Github Directory is structured such that all Python files and the assets folder are located in the root folder of the directory. This directory only contains one folder, which contains the visual PNG assets required for the game as well as the images included in this ReadMe. 
-  The class responsible for controlling the logical model of Minesweeper is the Board class, located in Board.py. This class can be used to generate boards for the Minesweeper game, as the name of the class suggests. All computations on the state of the board occur in the Board class, which utilizes Tile child class objects and Sampler (a class located in Board.py) objects. A Board object contains methods to alter its state as well as the states of the Tiles it contains. The Sampler object is used to randomly distribute Tiles in the create_board() method. Running the Board class allows the user to play a text version of the game, where the player can type in the console to play the game.
-  The Tile class, which is utilized heavily in the Board class and located in Tile.py, represents the state of a single tile on a Minesweeper board. This class defines the behaviour of a tile when it is revealed, clicked, or flagged. This class also has methods for returning its position, type, and string representation. The behaviour of a Tile when clicked is implemented in the child classes: BombTile, NumberTile, and EmptyTile.
+  
+  The class responsible for controlling the logical model of Minesweeper is the Board class, located in `Board.py`. This class can be used to generate boards for the Minesweeper game, as the name of the class suggests. All computations on the state of the board occur in the Board class, which utilizes Tile child class objects and Sampler (a class located in `Board.py`) objects. A Board object contains methods to alter its state as well as the states of the Tiles it contains. The Sampler object is used to randomly distribute Tiles in the `create_board()` method. Running the Board class allows the user to play a text version of the game, where the player can type in the console to play the game.
+  
+  The Tile class, which is utilized heavily in the Board class and located in `Tile.py`, represents the state of a single tile on a Minesweeper board. This class defines the behaviour of a tile when it is revealed, clicked, or flagged. This class also has methods for returning its position, type, and string representation. The behaviour of a Tile when clicked is implemented in the child classes: `BombTile`, `NumberTile`, and `EmptyTile`.
+  
   The Python classes TileView and MinesweeperGUI are responsible for running a visual version of the Minesweeper game, as shown in the screenshots. These classes utilize PyGame. The player uses the GUI to play the game.
 
 ## Authors and Contributions
@@ -38,7 +41,7 @@ To Play Minesweeper 2.0 the rules of the original minesweeper still apply. We ha
 #### Sohrab Amin
 > Insert Contribution
 #### Aishah Kabir
-> Insert Contribution
+> In regards to the coding aspect of the game, I implemented most of Minesweeper Class where we handled updating the display, reporting a game won, restarting the game, and the game loop. This file no longer exists because we realized there were better and more efficient ways to implement these methods instead of in Minesweeper Class. We moved these methods to MinesweeperGUI and Board.py and renamed them as well to things such as `update()`, `start_new_game()`, and `is_game_won()`. In the ReadMe file I created the instructions on how to install our game and revised the file to make sure things were gramatically and technially correct. 
 #### Emily Wu
 > Emily Wu implemented the completed versions of Board, Sampler, Tile, NumberTile, BombTile, and Empty Tile classes and wrote the documentation of those classes. These classes represent the logical model of the game, which controls the underlying mechanics of the gameplay. She contributed to the ReadMe file by describing the code she implemented under Documentation.
 #### Nan Xu
