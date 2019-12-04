@@ -39,7 +39,7 @@ both support changes to board size and addition of bombs. Some out-of-scope feat
 
 ## Authors and Contributions
 #### Kavin Adithiya
-> I worked on setting up the repository, adding the `.gitignore` file*, making the assets and the GUI element of the game. I set up the repository with required classes and added the `requirements.txt` file. `The requirements.txt` file is used by the IDE to install the dependencies of the project. I was responsible for implementing the GUI of the game, with the additon of other features. I created the `TileView.py` class which helps the `MinesweeperGUI.py`handle updating each tile of the board. I setup the pygame module for the GUI and implemented the entirety of the GUI in the current version. I was also incharge of adding the deatails about entending out game in the readme file. 
+> I worked on setting up the repository, adding the `.gitignore` file*, making the assets and the GUI element of the game. I set up the repository with required classes and added the `requirements.txt` file. `The requirements.txt` file is used by the IDE to install the dependencies of the project. I was responsible for implementing the GUI of the game, along with other additional features. I created the `TileView.py` class which helps the `MinesweeperGUI.py`handle updating each tile of the board. I setup the pygame module for the GUI and implemented the entirety of the GUI seen in the current version. I was also incharge of adding the [Extending Minesweeper 2.0](#extending-minesweeper-20) part of the readme file.  
 >*The git ignore file was generated online using the website gitignore.io.
 
 #### Sohrab Amin
