@@ -26,7 +26,7 @@ To Play Minesweeper 2.0 the rules of the original minesweeper still apply. We ha
 
 ## Extending Minesweeper 2.0
   Everyone is free to fork our project and extend to the game anyway you would like. There are pending features like the menu bar, the board size changer and number of bombs changer that are yet to be implemented. The GUI `MinesweeperGUI.py`and the logic class `Board.py`
-both support changes to board size and addition of bombs.
+both support changes to board size and addition of bombs. Some out-of-scope features like menu screen, appearance changer, different types of power ups, hint, etc could be added.
 
 ## Documentation
   The Github Directory is structured such that all Python files and the assets folder are located in the root folder of the directory. This directory only contains one folder, which contains the visual PNG assets required for the game as well as the images included in this ReadMe. 
@@ -39,7 +39,9 @@ both support changes to board size and addition of bombs.
 
 ## Authors and Contributions
 #### Kavin Adithiya
-> Insert Contribution
+> I worked on setting up the repository, adding the `.gitignore` file*, making the assets and the GUI element of the game. I set up the repository with required classes and added the `requirements.txt` file. `The requirements.txt` file is used by the IDE to install the dependencies of the project. I was responsible for implementing the GUI of the game, with the additon of other features. I created the `TileView.py` class which helps the `MinesweeperGUI.py`handle updating each tile of the board. I setup the pygame module for the GUI and implemented the entirety of the GUI in the current version. I was also incharge of adding the deatails about entending out game in the readme file. 
+>*The git ignore file was generated online using the website gitignore.io.
+
 #### Sohrab Amin
 > In terms of code, I contributed in designing the original Model-View Controller template. We used aspects of the original template in our current production code, with revisions of course. I created the `Minesweeper.py` class and it's corresponding methods and attributes. I used the original template here by creating the empty `__init__`, `update_display()`, `report_game_won()`, `restart()` and `game_loop()` methods. For each method I wrote the appropiate documentation, describing its purpose. Specfically, I implemented the `restart()` method. Unfortunately, we decided to remove the entirety of the `Minesweeper.py` file as it was redundant with other code we wrote. With regards to the README file, I decided to create a collaborative Google Docs file where we can share our ideas about what type of content we want to include. I then wanted to add the content into our actual README where I soon realized it uses a Markdown writing style. Using the markdown style, I added the appropiate headers and filled in the [How to Play Minesweeper](#playing-minesweeper-20) and [License](#license) sections. 
 
@@ -50,4 +52,5 @@ both support changes to board size and addition of bombs.
 #### Nan Xu
 > Insert Contribution
 ## License
+
 See the [LICENSE](LICENSE.txt) file for license rights and limitations (MIT).
