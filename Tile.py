@@ -14,12 +14,9 @@ class Tile:
         #TODO Reorganize attributes, functions, and documentation as needed
 
         === Public Attributes ===
-
         === Private Attributes ===
         _board:
             Stores the board that the Tile is in.
-        _icon:
-            Stores the appearance of any icon on the tile. Stores None if empty.
         _pos:
             Stores the position of the Tile in (x, y) format.
         _flagged:
@@ -28,6 +25,8 @@ class Tile:
             Stores whether the Tile's contents are revealed on the board.
             For example, the tile may be clicked to reveal a number,
             bomb, or empty space.
+        _tile_type:
+            Stores the string representation of this type of tile
 
         === Representation Invariants ===
             -_flagged and _revealed cannot store the same boolean value
@@ -78,7 +77,11 @@ class Tile:
     def _calculate_click(self) -> bool:
         """
         This method is only called by reveal_tile.
-        This is what is done when a tile is clicked.
+        This defines the behaviour of a tile
+        when the tile is clicked and revealed.
+        Different tiles have different behaviour.
+        For example, empty tiles reveal the surrounding
+        empty and numbered tiles.
 
         returns false if it is a bomb tile. returns true otherwise
         """
@@ -86,39 +89,47 @@ class Tile:
 
     def flag_tile(self) -> bool:
         """
-        Update the Tile _icon to a flag icon, as well as the game board's view.
+        If the tile is not revealed, then change the flagged state of this tile.
         Preconditions:
-        _revealed must be False
-        Called only by a right-click.
-
+            _revealed must be False, and the function is
+            called only by a right-click.
         Post conditions:
-        return whether flagging action is successful
+            return whether flagging action is successful
         """
         if self._revealed is False:
             self._flag()
             return True
         return False
-        # self._icon = #TODO set the correct icon
-        # TODO: implement game board's view updating.
 
     def _flag(self) -> None:
         """
         Changes the boolean value stored in _flagged.
-        Return true if flagged, else false
-        Precondition: _revealed is False
+
         """
         self._flagged = not self._flagged
 
     def is_flagged(self):
+        """
+        Return whether the tile is flagged.
+        :return: The value stored in _flagged.
+        """
         return self._flagged
 
     def get_position(self) -> Tuple[int, int]:
         """
-        :return: The position of the Tile
+        Gets the position of the tile.
+        :return: The position of the Tile in the form of (row, col)
         """
         return self._pos
 
     def get_tile_type(self) -> str:
+        """
+        Return "flag" if the tile is flagged. Otherwise, return "closed" if the
+        tile has not been clicked. If it has been clicked, return the type of
+        this tile.
+        :return: A string representation of the tile's state. This is either
+        "flag", "closed", or the stored _tile_type.
+        """
         if self.is_flagged():
             return "flag"
         elif not (self.is_revealed()):
@@ -127,15 +138,29 @@ class Tile:
             return self._tile_type
 
     def is_same_type(self, other: Tile) -> bool:
+        """
+        :param other: A Tile object
+        :return: Whether both this object and the
+        other tile object are the same.
+        """
         return self.get_tile_type() == other.get_tile_type()
 
-    def _reveal(self):
+    def _reveal(self) -> None:
+        """
+        Reveals the tile.
+        """
         self._revealed = True
 
-    def is_revealed(self):
+    def is_revealed(self) -> bool:
+        """
+        :return: A boolean. True if this tile is revealed, otherwise false.
+        """
         return self._revealed
 
     def to_string(self) -> str:
+        """
+        :return: A String representation of this Tile.
+        """
         if not self.is_revealed():
             if self.is_flagged():
                 return "[F]"
@@ -144,4 +169,7 @@ class Tile:
         return "[" + self.get_symbol() + "]"
 
     def get_symbol(self) -> str:
+        """
+        :return: A String representation of the contents of this tile.
+        """
         raise NotImplementedError

@@ -36,9 +36,9 @@ class MinesweeperGUI:
         self.board_height = 600
         self.board_width = 600
         self._button_board = []
-        self.col_size = 40
-        self.row_size = 40
-        self.bomb_number = 84
+        self.col_size = 20
+        self.row_size = 20
+        self.bomb_number = 42
         width = self.board_width
         height = self.menu_height + self.board_height
         pygame.init()

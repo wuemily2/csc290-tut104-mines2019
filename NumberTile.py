@@ -5,12 +5,11 @@ from Tile import Tile
 
 class NumberTile(Tile):
     """
-    The NumberTile class extends the Tile class. It should has all attributes
+    The NumberTile class extends the Tile class. It should have all attributes
     and methods of the Tile class.
     Each NumberTile has an attribute number which presents the number of
     bombs around it. The range of the number is 1 to 8.
-    The reveal_tile is implemented based on the behavior of
-    NumberTile.
+    The symbol representation of this tile is a number from 1 to 8.
     """
     _number: int
 
@@ -22,11 +21,15 @@ class NumberTile(Tile):
         Precondition: 1 <= number <= 8
         """
         super().__init__(board, position)
-        # self._icon
         self._number = number
         self._tile_type = f"{number}"
 
     def _calculate_click(self) -> bool:
+        """
+        Defines the behaviour of a NumberTile when it is clicked.
+        This function simply returns True, and otherwise does nothing.
+        :return: True
+        """
         return True
 
     def get_symbol(self) -> str:

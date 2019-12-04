@@ -13,14 +13,17 @@ class BombTile(Tile):
 
     def __init__(self, board: List[List[Tile]], position: Tuple[int, int]):
         """
-        Initialize the BombTile class with board and position like the
-        Tile class.
+        Initialize the BombTile class with board and position.
         """
         super().__init__(board, position)
-        # self._icon
         self._tile_type = "bomb"
 
     def _calculate_click(self) -> bool:
+        """
+            Defines the behaviour of a BombTile when it is clicked.
+            This function simply returns False, and otherwise does nothing.
+            :return: False
+        """
         return False
 
     def get_symbol(self) -> str:

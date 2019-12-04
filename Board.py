@@ -7,23 +7,32 @@ from NumberTile import NumberTile
 from random import randint
 import random
 
+
 # random.seed(0)
 
 
 class Board:
-    """Holds the board and handles edits on the board
+    """A class representing the state of the Minesweeper board, and holds
+    all of the Tiles.
+    This is considered the logical component of the game, and handles
+    the logical 'model' of a Minesweeper game.
 
     == Public Attributes ==
-    board: holds the board with all the tiles
+    board: A list representing the board with all the tiles
 
     == Private Attributes ==
     _row_size: the number of rows in the board
     _col_size: the number of columns in the board
     _num_bombs: the number of bombs to be placed when creating the board
+    _is_game_over: a boolean describing whether the game is over. True
+        if the game is over, otherwise False.
+    _flagged_bombs: an integer that indicates
+        the number of bombs that are flagged.
 
     === Representation Invariants ===
-
-
+    > _is_game_over is true iff a bomb is left-clicked or the number of flagged
+    bombs equals the number of bombs.
+    > _num_bombs cannot exceed _row_size*_col_size
     """
     _row_size: int
     _col_size: int
@@ -90,7 +99,7 @@ class Board:
                                          cur_tile.get_position()[1] + y_shift)
                                 other_tile = board[index[0]][
                                     index[1]]
-                                if index[0] >= 0 and index[1] >=0 and \
+                                if index[0] >= 0 and index[1] >= 0 and \
                                         isinstance(other_tile, BombTile):
                                     count += 1
                             except IndexError:  # do nothing
@@ -102,6 +111,9 @@ class Board:
         return board
 
     def print_board(self):
+        """
+        Prints a string representation of the board to the console.
+        """
         # This is a function to test board generation
         for arow in range(self._row_size):
             row_accum = "["
@@ -110,7 +122,16 @@ class Board:
             row_accum += "]"
             print(row_accum)
 
-    def reveal(self, arow, acol):
+    def reveal(self, arow:int, acol:int) -> None:
+        """
+        Reveal the contents of the tile at the given row and column.
+        This function does nothing if the game is over.
+        If the given row and column are not within the bound's range,
+        'Out of Bounds' is printed to the console.
+
+        :param arow: An integer representing a row on the board
+        :param acol: An integer representing a column on the board
+        """
         if self._is_game_over:
             return
         try:
@@ -119,7 +140,14 @@ class Board:
         except IndexError:
             print("Out of Bounds")
 
-    def flag(self, arow, acol):
+    def flag(self, arow:int, acol:int) -> None:
+        """
+        Flag a tile at the given row <arow> and column <acol>, and calculate
+        the number of flagged bombs. If all the bombs are flagged,
+        this game is over.
+        :param arow: An integer representing a row on the board
+        :param acol: An integer representing a column on the board
+        """
         if self._is_game_over:
             return
         try:
@@ -135,14 +163,27 @@ class Board:
             print("Out of Bounds")
 
     def is_game_won(self) -> bool:
-        # return if all bombs are flagged
+        """
+        :return: True if all bombs are flagged, otherwise false
+        """
         return self._flagged_bombs == self._num_bombs
 
-    def is_game_over(self):
+    def is_game_over(self) -> bool:
+        """
+        Return whether the game is over, using a stored value.
+        :return: A boolean. True if the game is over, otherwise False.
+        """
         return self._is_game_over
 
     def get_tile(self, row: int, col: int) -> Tile:
+        """
+        Return the Tile object at the given <row> and <col>umn.
+        :param row: An integer representing a row on the board
+        :param col: An integer representing a column on the board
+        :return: A Tile object.
+        """
         return self.board[row][col]
+
 
 class Sampler:
     """
@@ -169,6 +210,10 @@ class Sampler:
     _sample_count: int
 
     def __init__(self, distribution: Dict[int, List[str, int]]):
+        """
+        :param distribution: A Dictionary representing the sample as
+        specified in the docstring.
+        """
         self._sample = distribution
         self._sample_count = self.sum_count()
 
@@ -189,6 +234,10 @@ class Sampler:
         return self._sample_count == 0
 
     def output_draw(self) -> str:
+        """
+        :return: Randomly remove an item from the
+        sample space, without replacement
+        """
         if not self.is_empty():
             index = randint(1, self._sample_count)
             key = self.find_item(index)
@@ -214,14 +263,16 @@ class Sampler:
                 return i
 
     def print_sample_state(self):
+        """
+        :return: The remaining objects in the sample.
+        """
         print(self._sample)
 
 
 if __name__ == '__main__':
-    '''test = Sampler({1: ['Bomb', 1], 2: ['Empty', 6]})
-    for i in range(5):
-        print("You drew a " + test.output_draw() + "!")
-        test.print_sample_state()'''
+    """
+    This can be used to test a text version of the game.
+    """
     board_test = Board()
     keep_playing = True
     while keep_playing:
