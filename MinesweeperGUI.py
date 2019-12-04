@@ -1,5 +1,5 @@
 import pygame
-from typing import List, Dict, Optional
+from typing import List
 from Board import Board
 from TileView import TileView
 from BombTile import BombTile
@@ -8,7 +8,9 @@ import sys
 
 class MinesweeperGUI:
     """
-    MinesweeperGUI class handles the game window and updating it.
+    MinesweeperGUI is the main class of the minesweeper project which handles
+    the view and user inputs. The class also updates the view accordingly after
+    each user input.
 
     == Attributes ==
     menu_height: The height of the menu bar for all the menu buttons
@@ -31,14 +33,14 @@ class MinesweeperGUI:
     _button_board: List[List[TileView]]
     screen: pygame.display
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.menu_height = 50
         self.board_height = 600
         self.board_width = 600
         self._button_board = []
-        self.col_size = 20
-        self.row_size = 20
-        self.bomb_number = 42
+        self.col_size = 15
+        self.row_size = 15
+        self.bomb_number = 15
         width = self.board_width
         height = self.menu_height + self.board_height
         pygame.init()
@@ -56,9 +58,9 @@ class MinesweeperGUI:
         starting_x = int((self.board_width - (size[0]*self.col_size))/2)
         starting_y = int((self.board_height - (size[1]*self.row_size))/2) + self.menu_height
         position = [starting_x, starting_y]
-        print(position)
         self.board = Board(self.row_size, self.col_size, self.bomb_number)
         self.board.create_board()
+        # Makes each view tile and draws them on screen
         for row in range(self.row_size):
             self._button_board += [[]]
             for col in range(self.col_size):
@@ -97,9 +99,9 @@ class MinesweeperGUI:
                 if self._button_board[row][col].get_rect().collidepoint(
                         event.pos[0], event.pos[1]):
                     input = self._button_board[row][col].id
-                    if event.button == 1:
+                    if event.button == 1:  # Left click
                         self.board.reveal(input[0], input[1])
-                    elif event.button == 3:
+                    elif event.button == 3:  # Right click
                         self.board.flag(input[0], input[1])
                     self.update()
 
@@ -108,10 +110,13 @@ class MinesweeperGUI:
         Clears and updates the screen with new tile updates and info.
         """
         self.screen.fill((200, 200, 200))
+        # Goes through each tile and update them accordingly
         for row in range(self.row_size):
             for col in range(self.col_size):
                 image = self.board.board[row][col].get_tile_type()
                 self._button_board[row][col].update(self.screen, image)
+                # Reveals the tiles that are left when the game is over
+                # Only executes at the end of the game
                 if self.board.is_game_over():
                     self.board.get_tile(row, col).reveal_tile()
                     if self.board.get_tile(row, col).is_flagged() and \
@@ -127,19 +132,21 @@ class MinesweeperGUI:
          and updates board constantly.
         """
         crashed = False
+        self._create_board()
         while not crashed:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     crashed = True
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     self._board_event_handler(event)
-                    right = 2
 
             pygame.display.update()
 
 
 if __name__ == '__main__':
+    """
+    Handles the start of the game.
+    """
     sys.setrecursionlimit(2000)
     application = MinesweeperGUI()
-    application._create_board()
     application.start()
