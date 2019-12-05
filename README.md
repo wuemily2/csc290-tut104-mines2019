@@ -50,7 +50,7 @@ both support changes to board size and addition of bombs. Some out-of-scope feat
 #### Emily Wu
 > Emily Wu implemented the completed versions of Board, Sampler, Tile, NumberTile, BombTile, and Empty Tile classes and wrote the documentation of those classes. These classes represent the logical model of the game, which controls the underlying mechanics of the gameplay. She contributed to the ReadMe file by describing the code she implemented under Documentation.
 #### Nan Xu
-> Insert Contribution
+> In terms of code, I initiated three subclasses: `EmptyTile`, `NumberTile` and `BombTile` of the class `Tile` and intended to implement them as the project continues. However, the implementation of these three classes were completed by other teammates without further communication with me. In terms of READEME file, I participated in all communications of constructing the file and I added my contributions in the file.
 ## License
 
 See the [LICENSE](LICENSE.txt) file for license rights and limitations (MIT).
